@@ -17,7 +17,7 @@ class SearchField extends StatelessWidget {
           color: AppColor.lightGrey,
           fontFamily: 'R'
         ),
-        fillColor: Colors.grey[300],
+        fillColor: AppColor.blueGrey,
         filled: true,
         border: OutlineInputBorder(
           borderSide: BorderSide.none,

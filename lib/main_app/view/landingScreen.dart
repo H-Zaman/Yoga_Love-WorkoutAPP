@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:workout/main_app/view/homeScreen.dart';
 import 'package:workout/util/resource/color.dart';
 
+import 'homeScreen/homeScreen.dart';
 import 'widgets/appName.dart';
 import 'widgets/backgroundImage.dart';
 
