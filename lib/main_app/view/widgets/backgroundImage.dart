@@ -8,9 +8,9 @@ class BackgroundImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ImageFiltered(
-      imageFilter: ImageFilter.blur(sigmaX: 2,sigmaY: 2),
+      imageFilter: ImageFilter.blur(sigmaX: 1,sigmaY: 1),
       child: Image.asset(
-        image ?? 'assets/images/bg2.jpg',
+        image ?? 'assets/images/nbg.jpg',
         fit: BoxFit.cover,
       ),
     );

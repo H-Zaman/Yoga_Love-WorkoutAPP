@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
@@ -16,14 +17,12 @@ import 'screens/storePage.dart';
 import 'screens/trainingPage.dart';
 
 class HomeScreen extends StatelessWidget {
-  static var navIndex = 0.obs;
-  static changeNav(int index) => navIndex.value = index;
   static final _drawerController = ZoomDrawerController();
   @override
   Widget build(BuildContext context) {
     return ZoomDrawer(
       controller: HomeScreen._drawerController,
-      menuScreen: MenuScreen(),
+      menuScreen: DrawerScreen(),
       mainScreen: MainScreen(),
       borderRadius: 24.0,
       showShadow: true,
@@ -35,6 +34,8 @@ class HomeScreen extends StatelessWidget {
 }
 
 class MainScreen extends StatelessWidget {
+  static var navIndex = 0.obs;
+  static changeNav(int index) => navIndex.value = index;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -43,8 +44,9 @@ class MainScreen extends StatelessWidget {
           HomeScreen._drawerController.close();
         }
       },
-      child: Scaffold(
+      child: Obx(()=>Scaffold(
           extendBodyBehindAppBar: true,
+          extendBody: true,
           appBar: AppBar(
               leadingWidth: 60,
               leading: Padding(
@@ -74,7 +76,7 @@ class MainScreen extends StatelessWidget {
                 ),
               ),
               actions: [
-                Padding(
+                MainScreen.navIndex < 2 ? Padding(
                   padding: const EdgeInsets.only(right: 20),
                   child: CircleAvatar(
                     radius: 22,
@@ -85,14 +87,14 @@ class MainScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ) : SizedBox()
               ]
           ),
           body: Stack(
             children: [
               CircleBackground(),
               IndexedStack(
-                index: HomeScreen.navIndex.value,
+                index: MainScreen.navIndex.value,
                 children: [
                   HomePage(),
                   TrainingPage(),
@@ -102,43 +104,29 @@ class MainScreen extends StatelessWidget {
               ),
             ],
           ),
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              color: Colors.blueGrey.shade200.withOpacity(0.2),
-            ),
-            child: Container(
-              height: 60,
-              width: double.infinity,
-              color: Colors.grey.shade200.withOpacity(.8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Icon(
-                      Icons.api
-                  ),
-                  Icon(
-                      Icons.api
-                  ),
-                  Icon(
-                      Icons.api
-                  ),
-                  Icon(
-                      Icons.api
-                  ),
-                  Icon(
-                      Icons.api
-                  ),
-                ],
-              ),
-            ),
+          bottomNavigationBar: CurvedNavigationBar(
+            index: 0,
+            height: 50.0,
+            items: <Widget>[
+              Icon(CupertinoIcons.home, size: 25, color: MainScreen.navIndex.value == 0 ? Colors.white : AppColor.dark),
+              Icon(CupertinoIcons.chart_pie, size: 25, color: MainScreen.navIndex.value == 1 ? Colors.white : AppColor.dark),
+              Icon(Icons.store_mall_directory_outlined, size: 25, color: MainScreen.navIndex.value == 2 ? Colors.white : AppColor.dark),
+              Icon(CupertinoIcons.person, size: 25, color: MainScreen.navIndex.value == 3 ? Colors.white : AppColor.dark),
+            ],
+            color: Color(0xffEEEEF7),
+            buttonBackgroundColor: AppColor.main,
+            backgroundColor: Colors.transparent,
+            animationCurve: Curves.easeInOut,
+            animationDuration: Duration(milliseconds: 600),
+            onTap: MainScreen.changeNav,
+            letIndexChange: (index) => true,
           )
-      ),
+      ))
     );
   }
 }
 
-
-class MenuScreen extends StatelessWidget {
+class DrawerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

@@ -13,7 +13,7 @@ class HomeTabGridView extends StatelessWidget {
       padding: EdgeInsets.only(left: 20,right: 20,top: 20),
       child: StaggeredGridView.countBuilder(
         crossAxisCount: 4,
-        padding: EdgeInsets.zero,
+        padding: EdgeInsets.only(bottom: kBottomNavigationBarHeight),
         shrinkWrap: true,
         itemCount: GridViewItemModel.items.length,
         itemBuilder: (BuildContext context, int index) => GridViewItem(item: GridViewItemModel.items[index]),

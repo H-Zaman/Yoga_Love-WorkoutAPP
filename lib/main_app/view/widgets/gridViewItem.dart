@@ -52,6 +52,7 @@ class GridViewItem extends StatelessWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       '${item.time} Minutes',
@@ -62,7 +63,8 @@ class GridViewItem extends StatelessWidget {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: AppColor.dark)
+                        border: Border.all(color: AppColor.dark),
+                        borderRadius: BorderRadius.circular(3)
                       ),
                       child: Icon(
                         Icons.add,
