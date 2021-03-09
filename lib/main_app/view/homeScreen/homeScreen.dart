@@ -7,6 +7,7 @@ import 'package:workout/__demoData/demoData.dart';
 import 'package:get/get.dart';
 import 'package:workout/main_app/model/drawerItemModel.dart';
 import 'package:workout/main_app/repository/weather.dart';
+import 'package:workout/main_app/view/homeScreen/personalPlanSheet.dart';
 import 'package:workout/main_app/view/widgets/circleBg.dart';
 import 'package:workout/main_app/view/widgets/drawerItem.dart';
 import 'package:workout/util/resource/color.dart';
@@ -103,6 +104,23 @@ class MainScreen extends StatelessWidget {
                 ],
               ),
             ],
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+            color: AppColor.dark,
+            child: IconButton(
+              onPressed: (){
+                Get.bottomSheet(
+                  PersonalPlanSheet(),
+                  isScrollControlled: true
+                );
+              },
+              icon: Icon(
+                CupertinoIcons.add,
+                color: Colors.white,
+              ),
+            ),
           ),
           bottomNavigationBar: CurvedNavigationBar(
             index: 0,
